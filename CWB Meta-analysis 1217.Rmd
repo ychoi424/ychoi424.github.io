@@ -1,0 +1,42 @@
+---
+title: "CWB Meta-analysis"
+author: "Yeeun Choi"
+date: "December 17, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=999)
+```
+
+```{r include=FALSE}
+library(readxl)
+library(DT)
+library(tidyverse)
+library(reactable)
+library(collapsibleTree)
+library(htmltools)
+```
+
+```{r include=FALSE}
+OA_T1 <- read_excel("data/Combined Tables.xlsx", sheet = "OA Table 1")
+```
+
+```{r include=FALSE}
+`Keywords for Control` <- OA_T1 %>%
+  dplyr::select(`Keywords for Control`, `Related Articles Measure Used`)
+```
+
+### **Instructions:** Click on a construct label below to explore the keywords for control taxonomy
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+collapsibleTree(
+  `Keywords for Control`,
+  hierarchy = c("Keywords for Control",
+                "Related Articles Measure Used"),
+  width = 1200,
+  zoomable = TRUE,
+  tooltip = FALSE,
+  collapsed = TRUE
+)
+```
